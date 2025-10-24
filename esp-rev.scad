@@ -60,13 +60,14 @@ module esp_rev_holes(cut_depth = 2) {
 
 module esp_rev_pins(
   angle = 0,
+  include_cable = false,
 ) {
 
     translate([2.54*2,1.4,1.6])
-    pin_header(16, angle=angle+180);
+    pin_header(16, angle=angle+180, include_cable = include_cable);
 
     translate([2.54*6,23-1.4,1.6])
-    pin_header(12, angle=angle);
+    pin_header(12, angle=angle, include_cable = include_cable);
 }
 
 module esp_rev() {

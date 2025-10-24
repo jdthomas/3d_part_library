@@ -55,12 +55,13 @@ module esp_fwd_holes(cut_depth = 2) {
 
 module esp_fwd_pins(
   angle = 0,
+  include_cable = false,
 ) {
     translate([2.54*6,1.4,4.1])
-    pin_header(12, angle=angle+180);
+    pin_header(12, angle=angle+180, include_cable=include_cable);
 
     translate([2.54*2,23-1.4,4.1])
-    pin_header(16, angle=angle);
+    pin_header(16, angle=angle, include_cable=include_cable);
 }
 
 // Re-expose esp32-fwd as rotated to align better with the reverese version.

@@ -2,6 +2,30 @@
 // Supports straight and angled configurations
 // Single row only
 
+
+// Single pin cable connector - positioned at origin, extends upward in +Z
+module pin_header_cable() {
+  // Plug is: 2.7 x 2.7 x 14.2
+  plug_width = 2.7;
+  plug_depth = 2.7;
+  plug_length = 14.2;
+  cable_diameter = 1.4;
+  cable_length = 2.0;  // 2mm cable extension for minimum clearance indication
+
+  union() {
+    // Connector plug housing (centered on origin)
+    color("DimGray")
+      translate([-plug_width/2, -plug_depth/2, 0])
+        cube([plug_width, plug_depth, plug_length]);
+
+    // Cable wire extending upward
+    color("Black")
+      translate([0, 0, plug_length])
+        cylinder(h=cable_length, d=cable_diameter, center=false, $fn=12);
+  }
+}
+
+
 // Standard dimensions based on common specifications:
 // - Pitch: 2.54mm between pins
 // - Pin size: 0.64mm × 0.64mm (square)
@@ -13,7 +37,8 @@ module pin_header(
   num_pins = 1,
   angle = 0,                 // 0=straight, 90=right-angle (+Y), 270=right-angle (-Y)
   pin_length_above = 6,      // length of pin above plastic body (or horizontal length for angled)
-  pin_length_below = 2       // length of pin below plastic body (insertion)
+  pin_length_below = 2,      // length of pin below plastic body (insertion)
+  include_cable = false,
 ) {
 
   // Pin and body dimensions
@@ -40,6 +65,14 @@ module pin_header(
               cube([pin_size, pin_size, pin_length_below + pin_length_above], center=true);
           }
         }
+
+      // Cable connectors (if requested) - one per pin
+      if (include_cable) {
+        for (i = [0:num_pins-1]) {
+          translate([i * pitch + pitch/2, 0, body_height])
+            pin_header_cable();
+        }
+      }
     }
   } else if (angle == 90 || angle == 270) {
     // Right-angle pin header
@@ -65,6 +98,15 @@ module pin_header(
               cube([pin_size, pin_length_above, pin_size], center=true);
           }
         }
+
+      // Cable connectors (if requested) - one per pin
+      if (include_cable) {
+        for (i = [0:num_pins-1]) {
+          translate([i * pitch + pitch/2, direction * pitch, bend_height])
+            rotate([-direction * 90, 0, 0])
+              pin_header_cable();
+        }
+      }
     }
   }
 }
