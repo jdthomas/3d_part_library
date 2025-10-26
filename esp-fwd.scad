@@ -13,7 +13,7 @@ module esp_fwd_mounting_posts(height, embed=1) {
   translate([48.2, 21, min_height - .7]) mounting_post(height + min_height, embed=embed);
 }
 
-module esp_fwd_holes(cut_depth = 2) {
+module esp_fwd_holes(cut_depth = 2, include_trench=false) {
 
   module usb_c_hole(cut_depth) {
     W = 3;
@@ -51,6 +51,10 @@ module esp_fwd_holes(cut_depth = 2) {
   translate([0, 7.2, 2.5])
     rotate([0, 90, 0])
       usb_c_hole(cut_depth);
+  if (include_trench) {
+    translate([6,-4.5,-3])
+    cube([ 9, 18, 6 ]);
+  }
 }
 
 module esp_fwd_pins(
