@@ -1,5 +1,4 @@
 use <./mounting_post.scad>
-use <./esp32-fwd-part.scad>
 use <./pin_headers.scad>
 
 /// TODO: Share most of the code with the reverse version
@@ -67,6 +66,9 @@ module esp_fwd_pins(
     translate([2.54*2,23-1.4,4.1])
     pin_header(16, angle=angle, include_cable=include_cable);
 }
+
+// https://github.com/adafruit/Adafruit_CAD_Parts/tree/main/5300%20ESP32-S2%20TFT%20Feather
+use <./esp32-fwd-part.scad>
 
 // Re-expose esp32-fwd as rotated to align better with the reverese version.
 module esp_fwd() {

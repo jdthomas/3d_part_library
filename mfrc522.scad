@@ -1,6 +1,5 @@
 
 use <./mounting_post.scad>
-use <./mfrc522-part.scad>
 use <./pin_headers.scad>
 
 module mfrc522_mounting_posts(height, embed=1) {
@@ -28,6 +27,9 @@ module mfrc522_pins(
     pin_header(8, angle=angle+180, include_cable=include_cable);
 
 }
+
+// https://grabcad.com/library/rfid-rc5222-1
+use <./mfrc522-part.scad>
 
 module mfrc522() {
   solid_object();

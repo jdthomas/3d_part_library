@@ -1,6 +1,5 @@
 
 use <./mounting_post.scad>
-use <./sds011-part.scad>
 
 module sds011_mounting_posts(height, embed=1) {
   min_height = 2.0;
@@ -18,6 +17,8 @@ module sds011_holes(cut_depth = 2) {
       cylinder(h=cut_depth + 10, r=4);
 }
 
+// https://grabcad.com/library/nova-pmsensor-sds011-1
+use <./sds011-part.scad>
 
 module sds011() {
   solid_object();

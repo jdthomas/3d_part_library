@@ -1,5 +1,4 @@
 use <./mounting_post.scad>
-use <./esp32-rev-part.scad>
 use <./pin_headers.scad>
 
 
@@ -70,6 +69,8 @@ module esp_rev_pins(
     pin_header(12, angle=angle, include_cable = include_cable);
 }
 
+// https://github.com/adafruit/Adafruit_CAD_Parts/tree/main/5691%20Feather%20ESP32%20S3%20Reverse%20TFT
+use <./esp32-rev-part.scad>
 module esp_rev() {
   solid_object();
 }
