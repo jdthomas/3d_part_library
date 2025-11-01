@@ -3,7 +3,7 @@ use <./mounting_post.scad>
 use <./pin_headers.scad>
 
 module ky040_mounting_posts(height, embed=1) {
-    min_height = 1.0;
+    min_height = 3.5;
     translate([-8.5,7.4,-1]) {
         translate([ 0, 0, 0 ]) mounting_post(height + min_height, embed=embed);
         translate([ 0 + 14, 0, 0 ]) mounting_post(height + min_height, embed=embed);
